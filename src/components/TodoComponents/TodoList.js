@@ -3,27 +3,49 @@ import Todo from "./Todo";
 import "./Todo.css";
 import TodoForm from "./TodoForm";
 const listItems = [
-  { todoItem: "Sample Todo Item 1" },
-  { todoItem: "Sample Todo Item 2" }
+  { id: Date.now(), task: "Sample Todo Item 1", completed: false },
+  { id: Date.now(), task: "Sample Todo Item 2", completed: false }
 ];
 class TodoList extends React.Component {
   constructor() {
     super();
     this.state = {
       list: listItems,
-      todoItem: ""
+      id: "",
+      task: "",
+      completed: ""
     };
   }
+  handleChanges = event => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+  updateTodoList = event => {
+    event.preventDefault();
+    const newListItems = {
+      task: this.state.task
+    };
+    this.setState({
+      list: [...this.state.list, newListItems]
+    });
+  };
   render() {
     return (
       <div className="todo-container">
         <div className="todo-item">
-          {this.state.list.map(function(listInfo, index) {
-            return <Todo key={index} listProps={listInfo} />;
+          {this.state.list.map(function(listInfo) {
+            return <Todo key={listInfo.id} listProps={listInfo} />;
           })}
         </div>
         <div>
-          <TodoForm todoItem={this.state.todoItem} />
+          <TodoForm
+            task={this.state.task}
+            id={Date.now()}
+            completed={false}
+            handleChanges={this.handleChanges}
+            updateTodoList={this.updateTodoList}
+          />
         </div>
       </div>
     );
