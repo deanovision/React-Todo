@@ -20,6 +20,26 @@ class App extends React.Component {
       [event.target.name]: event.target.value
     });
   };
+  toggleItems = id => {
+    console.log(id);
+    const newList = this.state.list.map(listInfo => {
+      if (listInfo.id === id) {
+        return { ...listInfo, completed: !listInfo.completed };
+      } else return listInfo;
+    });
+    this.setState({
+      list: newList
+    });
+  };
+  clearItems = event => {
+    event.preventDefault();
+    const filteredList = this.state.list.filter(listItems => {
+      return listItems.completed === false;
+    });
+    this.setState({
+      list: filteredList
+    });
+  };
   updateTodoList = event => {
     event.preventDefault();
     const newListItems = {
@@ -31,11 +51,22 @@ class App extends React.Component {
       list: [...this.state.list, newListItems]
     });
   };
+  toggleClass = props => {
+    if (props.completed === true) {
+      return "completed";
+    } else {
+      return "not-completed";
+    }
+  };
   render() {
     return (
       <div className="todo-container">
         <div className="todo-item">
-          <TodoList list={this.state.list} />
+          <TodoList
+            list={this.state.list}
+            toggleItems={this.toggleItems}
+            toggleClass={this.toggleClass}
+          />
         </div>
         <div>
           <TodoForm
@@ -43,6 +74,7 @@ class App extends React.Component {
             handleChanges={this.handleChanges}
             updateTodoList={this.updateTodoList}
           />
+          <button onClick={this.clearItems}>Clear Completed Items</button>
         </div>
       </div>
     );
