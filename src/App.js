@@ -61,6 +61,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="todo-container">
+        <h1 claassName="heading">Todo List</h1>
         <div className="todo-item">
           <TodoList
             list={this.state.list}
@@ -74,7 +75,9 @@ class App extends React.Component {
             handleChanges={this.handleChanges}
             updateTodoList={this.updateTodoList}
           />
-          <button onClick={this.clearItems}>Clear Completed Items</button>
+          <button className="clear-items" onClick={this.clearItems}>
+            Clear Completed Items
+          </button>
         </div>
       </div>
     );

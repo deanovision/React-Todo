@@ -1,4 +1,38 @@
+* {
+  box-sizing: border-box;
+}
 .completed {
+  font-size: 24px;
+  padding: 10px 0px;
   color: red;
   text-decoration-line: line-through;
+}
+.not-completed {
+  padding: 10px 0px;
+  font-size: 24px;
+  color: darkslategrey;
+}
+.todo-form input {
+  margin-top: 20px;
+  width: 200px;
+  height: 30px;
+  border-radius: 12px;
+}
+.todo-form button {
+  margin-top: 20px;
+  width: 200px;
+  padding: 5px;
+  background: slateblue;
+  color: white;
+  font-weight: bold;
+  border-radius: 12px;
+}
+.clear-items {
+  margin-top: 10px;
+  width: 200px;
+  padding: 5px;
+  background: orangered;
+  color: white;
+  font-weight: bold;
+  border-radius: 12px;
 }
